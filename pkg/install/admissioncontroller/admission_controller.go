@@ -133,6 +133,10 @@ func setAdmissionControllerContainers(clusterInstance *hwameistoriov1alpha1.Clus
 			}
 			imageSpec := clusterInstance.Spec.AdmissionController.Controller.Image
 			container.Image = imageSpec.Registry + "/" + imageSpec.Repository + ":" + imageSpec.Tag
+
+			dataLoadManager := clusterInstance.Spec.DataLoadManager.DataLoadManagerContainer.Image
+			dataloadImageValue := dataLoadManager.Registry + "/" + "hwameistor/dataload-init" + ":" + dataLoadManager.Tag
+
 			container.Env = append(container.Env, []corev1.EnvVar{
 				{
 					Name:  "WEBHOOK_NAMESPACE",
@@ -141,6 +145,10 @@ func setAdmissionControllerContainers(clusterInstance *hwameistoriov1alpha1.Clus
 				{
 					Name:  "FAILURE_POLICY",
 					Value: clusterInstance.Spec.AdmissionController.FailurePolicy,
+				},
+				{
+					Name:  "DATALOADER_IMAGE",
+					Value: dataloadImageValue,
 				},
 			}...)
 		}
