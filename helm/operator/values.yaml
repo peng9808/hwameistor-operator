@@ -147,7 +147,7 @@ ha:
   deployOnMaster: "yes"
   imageRepository: hwameistor/drbd9-shipper
   drbdVersion: v9.0.32-1
-  shipperChar: v0.4.2
+  shipperChar: v0.4.3
 
 drbdRhel7:
   imageRepository: hwameistor/drbd9-rhel7
